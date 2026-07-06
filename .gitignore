@@ -1,0 +1,12 @@
+# Editor metadata
+.vscode/
+.idea/
+
+# OS noise
+.DS_Store
+Thumbs.db
+
+# Environment files
+.env
+.env.*
+!.env.example
