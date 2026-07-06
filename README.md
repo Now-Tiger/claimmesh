@@ -27,6 +27,9 @@ The worker and notification_service are never required for the API to boot — i
    ```bash
    git clone github.com/Now-Tiger/claimmesh && cd claimmesh
    cp .env.example .env
+   cp backend/.env.example backend/.env
+   cp worker/.env.example worker/.env
+   cp notification_service/.env.example notification_service/.env
    ```
 
    Edit `.env` and set a real(**anything**) `API_KEY` (used by all endpoints except `/health`).
@@ -87,10 +90,10 @@ Route everything through the gateway instead by hitting `http://localhost:8080/a
 ## Logs & Observability
 
 ```bash
-make logs                                   # all services, tailed
-docker compose logs -f backend              # structured request logs (loguru, JSON)
+make logs                                    # all services, tailed
+docker compose logs -f backend               # structured request logs (loguru, JSON)
 docker compose logs -f worker                # CSV ingestion / fraud-flag recompute logs
-docker compose logs -f notification-service # domain event notifications
+docker compose logs -f notification-service  # domain event notifications
 ```
 
 Backend logs also persist to `backend/logs/claimmesh-backend.log` (rotated at 10 MB, retained 7 days).
