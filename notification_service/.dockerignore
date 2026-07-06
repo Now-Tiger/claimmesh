@@ -1,0 +1,36 @@
+# .dockerignore
+
+# Version control
+.git
+.gitignore
+
+# Secrets — never bake .env into an image
+.env
+
+# Python artefacts
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache
+.mypy_cache
+*.egg-info
+dist/
+build/
+
+# Local virtual environments
+.venv
+venv/
+
+# Editor metadata
+.vscode/
+.idea/
+
+# OS noise
+.DS_Store
+Thumbs.db
+
+# Environment files
+.env
+.env.*
+!.env.example

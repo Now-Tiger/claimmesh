@@ -1,0 +1,11 @@
+[project]
+name = "notification-service"
+version = "0.1.0"
+description = "RabbitMQ Consumer Notification Dispatcher"
+readme = "README.md"
+requires-python = ">=3.14.0"
+dependencies = [
+    "dotenv>=0.9.9",
+    "pika>=1.4.1",
+    "loguru>=0.7.3",
+]
