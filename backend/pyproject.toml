@@ -1,0 +1,21 @@
+[project]
+name = "backend"
+version = "0.1.0"
+description = "FastAPI Main Application Backend"
+readme = "README.md"
+requires-python = ">=3.14.0"
+dependencies = [
+  "fastapi",
+  "uvicorn[standard]",
+  "sqlalchemy[asyncio]",
+  "alembic",
+  "pandas",
+  "pydantic",
+  "pydantic-settings",
+  "loguru",
+  "celery",
+  "redis",
+  "prometheus-client>=0.25.0",
+  "asyncpg>=0.31.0",
+  "python-multipart>=0.0.32",
+]
