@@ -1,0 +1,65 @@
+{
+  "$schema": "https://www.krakend.io/schema/v2.13/krakend.json",
+  "version": 3,
+  "name": "High-Throughput-API-Gateway",
+  "port": 8080,
+  "timeout": "3000ms",
+  "cache_ttl": "0s",
+  "output_encoding": "json",
+  "extra_config": {
+    "telemetry/logging": {
+      "level": "ERROR",
+      "prefix": "[KRAKEND]",
+      "syslog": false,
+      "stdout": true
+    }
+  },
+  "endpoints": [
+    {
+      "endpoint": "/api/v1/{element}",
+      "method": "GET",
+      "output_encoding": "json",
+      "input_headers": [
+        "Accept-Language",
+        "X-Forwarded-For",
+        "User-Agent",
+        "Content-Type"
+      ],
+      "backend": [
+        {
+          "url_pattern": "/api/v1/{element}",
+          "encoding": "json",
+          "sd": "static",
+          "host": ["http://backend:8000"],
+          "disable_host_sanitize": false,
+          "extra_config": {
+            "backend/http": {
+              "max_idle_conns": 10000,
+              "max_idle_conns_per_host": 5000,
+              "idle_conn_timeout": "120s",
+              "return_error_details": "api_backend_error"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "endpoint": "/health",
+      "method": "GET",
+      "backend": [
+        {
+          "url_pattern": "/health",
+          "host": ["http://backend:8000"],
+          "extra_config": {
+            "backend/http": {
+              "max_idle_conns": 10000,
+              "max_idle_conns_per_host": 5000,
+              "idle_conn_timeout": "120s",
+              "return_error_details": "health_backend_error"
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
